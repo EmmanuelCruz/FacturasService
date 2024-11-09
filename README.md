@@ -24,3 +24,7 @@ Una factura se compone de la siguiente estructura
                 "descripcion": "Pollos"
             }
         }
+
+### CAMBIOS
+
+Nuevo cambio desde la rama nueva
