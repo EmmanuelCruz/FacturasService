@@ -1,0 +1,200 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Factura Microservice Endpoints",
+        "description": "Definición de los Endpoints de Factura Service para el control de facturación.",
+        "contact": {
+            "name": "Emmanuel Cruz Hernández",
+            "url": "https://github.com/EmmanuelCruz",
+            "email": "emmanuel.cruzhe@gmail.com"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/facturas/{id}": {
+            "get": {
+                "tags": [
+                    "factura-controller"
+                ],
+                "operationId": "obtenerFacturaPorId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Factura"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "factura-controller"
+                ],
+                "operationId": "actualizarFactura",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Factura"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Factura"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "factura-controller"
+                ],
+                "operationId": "eliminarFactura",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/api/facturas": {
+            "get": {
+                "tags": [
+                    "factura-controller"
+                ],
+                "operationId": "obtenerFacturas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Factura"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "factura-controller"
+                ],
+                "operationId": "crearFactura",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Factura"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Factura"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Factura": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "precioVenta": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "type": "string"
+                    },
+                    "divisa": {
+                        "type": "string"
+                    },
+                    "producto": {
+                        "$ref": "#/components/schemas/Producto"
+                    }
+                }
+            },
+            "Producto": {
+                "required": [
+                    "clave",
+                    "descripcion"
+                ],
+                "type": "object",
+                "properties": {
+                    "clave": {
+                        "type": "string"
+                    },
+                    "descripcion": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
