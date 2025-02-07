@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facturas-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facturas-service
+  template:
+    metadata:
+      labels:
+        app: facturas-service
+    spec:
+      containers:
+        - name: facturas-service
+          image: emmanuelcruz/facturas-service:v3
+          ports:
+            - containerPort: 8081

@@ -25,6 +25,10 @@ Una factura se compone de la siguiente estructura
             }
         }
 
-### CAMBIOS
+### MANIFEST
 
-Nuevo cambio desde la rama nueva
+En el directorio *Manifest* se encuentran los siguientes archivos
+
+* **Dockerfile**: Archivo Dockerfile para crear la imagen del proyecto
+* **facturas-deployment.yaml**: Configuración yaml para realizar el deploy de la imagen
+* **facturas-service.yaml**: Configuración yaml para crear el servicio
