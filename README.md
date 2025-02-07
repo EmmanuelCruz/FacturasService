@@ -32,3 +32,11 @@ Cambio realizado para el módulo 5 del diplomado. La actividad consiste en reali
 * Creación de rama *dev*
 * Creación de rama *feature/unit_testing*
 * Marca de mensaje para prueba unitaria de mensaje en la rama *feature/unit_testing*
+
+### MANIFEST
+
+En el directorio *Manifest* se encuentran los siguientes archivos
+
+* **Dockerfile**: Archivo Dockerfile para crear la imagen del proyecto
+* **facturas-deployment.yaml**: Configuración yaml para realizar el deploy de la imagen
+* **facturas-service.yaml**: Configuración yaml para crear el servicio
