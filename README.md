@@ -25,6 +25,10 @@ Una factura se compone de la siguiente estructura
             }
         }
 
-### CAMBIOS
+### CAMBIOS PARA UNIT TEST
 
-Nuevo cambio desde la rama nueva
+Cambio realizado para el módulo 5 del diplomado. La actividad consiste en realizar los puntos siguientes:
+
+* Creación de rama *dev*
+* Creación de rama *feature/unit_testing*
+* Marca de mensaje para prueba unitaria de mensaje en la rama *feature/unit_testing*
