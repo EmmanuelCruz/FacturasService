@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('emmanuelcruz-docker-registry')
-        DOCKER_IMAGE = 'emmanuelcruz/facturas-service:$TAG'
+        DOCKER_IMAGE = 'emmanuelcruz/facturas-service:v3.1'
     }
     stages {
         stage('Initialize') {
