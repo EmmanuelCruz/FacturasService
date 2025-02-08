@@ -4,6 +4,10 @@ pipeline {
         maven 'maven'
         jdk 'JDK17'
     }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('emmanuelcruz-docker-registry')
+        DOCKER_IMAGE = 'emmanuelcruz/facturas-service:$TAG'
+    }
     stages {
         stage('Initialize') {
             steps {
@@ -18,22 +22,18 @@ pipeline {
                 '''
             }
         }
-    }
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('emmanuelcruz-docker-registry')
-        DOCKER_IMAGE = 'emmanuelcruz/facturas-service:$TAG'
-    }
-    stage('Build') {
-        steps {
-            sh 'sudo docker build -t ${DOCKER_IMAGE} .'
+        stage('Build') {
+            steps {
+                sh 'sudo docker build -t ${DOCKER_IMAGE} .'
+            }
         }
-    }
-    stage('Login & Push') {
-        steps {
-            sh '''
+        stage('Login & Push') {
+            steps {
+                sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
                 sudo docker push ${DOCKER_IMAGE}
             '''
+            }
         }
     }
 }
