@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://user:user_pass@cluster0.3tfnj.mongodb.net/facturas
+      database: facturas
+      username: user
+      password: user_pass
+
+server:
+  port: 8081

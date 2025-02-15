@@ -2,7 +2,7 @@ package snippet;
 
 public class Snippet {
 	public static void main(String[] args) {
-		322040070
+		System.out.println("Snippet");
 	}
 }
 
