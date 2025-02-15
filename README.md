@@ -32,3 +32,10 @@ En el directorio *Manifest* se encuentran los siguientes archivos
 * **Dockerfile**: Archivo Dockerfile para crear la imagen del proyecto
 * **facturas-deployment.yaml**: Configuración yaml para realizar el deploy de la imagen
 * **facturas-service.yaml**: Configuración yaml para crear el servicio
+
+### MANIFEST/TEKTON/EXAMPLES
+
+Archivos de ejemplo para Task en Tekton
+
+* **hello-world-task.yaml**: Archivo de configuración para crear una tarea
+* **hello-world-taskrun.yaml**: Archivo de configuración para correr una tarea
