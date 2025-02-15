@@ -47,3 +47,4 @@ Archivos de ejemplo para Task en Tekton
 
 * **hello-world-task.yaml**: Archivo de configuración para crear una tarea
 * **hello-world-taskrun.yaml**: Archivo de configuración para correr una tarea
+* **taskrun-gitclone**: Archivo para ejemplo de gitclone
