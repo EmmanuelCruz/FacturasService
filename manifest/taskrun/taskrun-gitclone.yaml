@@ -16,5 +16,6 @@ spec:
   - name: deleteExisting
     value: "true"
   workspaces:
-  - name: output
-    emptyDir: {}
+  - name: directory
+    persistentVolumeClaim:
+      claimName: workspace
