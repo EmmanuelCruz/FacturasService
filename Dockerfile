@@ -1,4 +1,4 @@
-FROM openjdk:17-oracle
+FROM FROM docker.io/openjdk:17-oracle
 LABEL maintainer="Emmanuel Cruz Hernández"
 EXPOSE 8081
 ARG JAR_FILE=target/*.jar
