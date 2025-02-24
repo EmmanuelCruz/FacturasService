@@ -1,0 +1,21 @@
+piVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: kubernetes-actions
+  namespace: diploe2-ech
+spec:
+  serviceAccountName: tekton-sa
+  taskRef:
+    name: kubernetes-actions
+  params:
+    - name: script
+      value: |
+        kubectl delete deployment facturas-service
+        kubectl create deployment facturas-service --image=docker.io/emmanuelcruz/facturas-service:v3.1
+        echo "----------"
+        kubectl get deployment
+  workspaces:
+  - name: kubeconfig-dir
+    emptyDir: {}
+  - name: manifest-dir
+    emptyDir: {}
