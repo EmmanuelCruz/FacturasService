@@ -111,6 +111,14 @@ Comando para aplicar los cambios
 
     kubectl apply -f service-account.yaml
 
+## task
+### task-echo.yaml
+Configuraciones para la creación de una Task eque hace un `echo` de un mensaje
+
+Comando para crear la taskrun
+
+    kubectl create -f task-echo.yaml
+
 ## taskrun
 ### gitclone-taskrun.yaml
 Configuraciones para la creación de una Taskrun encargada de realizar la clonación de un repositorio en Git, en este caso particular, para clonar el repositorio [FacturasService](https://github.com/EmmanuelCruz/Modulo5-FacturasService)
@@ -210,11 +218,49 @@ Comando para crear el volumen
 
     kubectl apply -f persisten-volume.yaml
 
+## pipeline
+### tekton-pipeline-hello-world.yaml
+Configuraciones para la creación de una Pipeline encargada de realizar las siguientes tareas
+
+* **hello**: Imprime un mensaje con `echo`. Usa la Task *task-echo*
+* **git-clone**: Clona un repositorio de Git. Usa la Task *git-clone*
+* **goodbye**: Después de que corre la task *git-clone*, usa la imagen *busybox* para imprimir el mensaje *my first pipeline is done and executed!*. Este paso crea una tarea "al vuelo", es decir, se crea al mismo momento en que se espeficica en la Pipeline.
+
+Comando para crear la Pipeline
+
+    kubectl create -f tekton-pipeline-hello-world.yaml
+
+## pipelinerun
+## 
+Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **tekton-pipeline-hello-world.yaml**.
+
+Comando para crear la Pipelinerun
+
+    kubectl create -f tekton-pipelinerun-hello-world.yaml
+
+Resultado esperado
+
+* Creación de tres Taskruns y tres Pods
+
+![pipelines1](assets/pipelines1.png)
+
+* Salida del Pod *hello-world-pod*
+
+![pipelines2](assets/pipelines2.png)
+
+* Salida del Pod *git-clone-pod*
+
+![pipelines3](assets/pipelines3.png)
+
+* Salida del Pod *goodbye-pod*
+
+![pipelines4](assets/pipelines4.png)
+
 ## tekton
 ### hello-worl-task.yaml
 Configuración para la creación de una Task encargada de correr la ejemplificación de un *Hello-world* usando el comando *echo*.
 
-Comando para crear la tas
+Comando para crear la task
 
     kubectl create -f hello-worl-task.yaml
 
