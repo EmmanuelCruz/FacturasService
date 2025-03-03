@@ -188,6 +188,21 @@ Resultado esperado
 
 ![deploy1](assets/deploy1.png)
 
+### update-deployment-taskrun.yaml
+Configuraciones para la creación de una Taskrun encargada de actualizar los recursos por medio de un *patch*, el cual, permite actualizar los campos de un recurso mediante un merge de forma estratégica, en este caso, para actualizar un deployment de *facturas-service* con una imagen en DockerHub.
+
+Comando para crear la taskrun
+
+    kubectl create -f update-deployment-taskrun.yaml
+
+Comando para instalar Task
+
+    kubectl apply -f https://api.hub.tekton.dev/v1/resource/tekton/task/kubernetes-actions/0.2/raw
+
+Resultado esperado
+
+![patch1](assets/patch1.png)
+
 ### persisten-volume.yaml
 Configuración para la creación de un volumen persistente con capacidad de 1Gi.
 
