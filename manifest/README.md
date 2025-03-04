@@ -230,8 +230,18 @@ Comando para crear la Pipeline
 
     kubectl create -f tekton-pipeline-hello-world.yaml
 
+### pipeline-clone-package.yaml
+Configuraciones para la creación de una Pipeline encargada de realizar las siguientes tareas
+
+* **fetch-repository**:  Clona un repositorio de Git. Usa la Task *git-clone*
+* **maven**: Después de que corre la task *fetch-repository*, usa la Task *maven* para empaquetar un proyecto de Maven, aplicando los comandos `clean` y `package`.
+
+Comando para crear la Pipeline
+
+    kubectl create -f pipeline-clone-package.yaml
+
 ## pipelinerun
-## 
+## tekton-pipelinerun-hello-world.yaml
 Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **tekton-pipeline-hello-world.yaml**.
 
 Comando para crear la Pipelinerun
@@ -255,6 +265,27 @@ Resultado esperado
 * Salida del Pod *goodbye-pod*
 
 ![pipelines4](assets/pipelines4.png)
+
+## pipelinerun-clone-package.yaml
+Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **pipeline-clone-package.yaml**.
+
+Comando para crear la Pipelinerun
+
+    kubectl create -f pipelinerun-clone-package.yaml
+
+Resultado esperado
+
+* Creación de dos Taskruns y dos Pods: *fetch-repository* y *maven*
+
+![clone-package1](assets/clone-package1.png)
+
+* Salida del Pod *fetch-repository*
+
+![clone-package2](assets/clone-package2.png)
+
+* Salida del Pod *maven*
+
+![clone-package3](assets/clone-package3.png)
 
 ## tekton
 ### hello-worl-task.yaml
