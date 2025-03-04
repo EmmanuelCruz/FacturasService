@@ -287,7 +287,49 @@ Resultado esperado
 
 ![clone-package3](assets/clone-package3.png)
 
-## tekton
+## tekton pipelines
+### pipeline-ci.yaml
+Configuraciones para la creación de una Pipeline encargada de realizar las siguientes tareas
+
+* **fetch-repository**:  Clona un repositorio de Git. Usa la Task *git-clone*
+* **maven**: Después de que corre la task *fetch-repository*, usa la Task *maven* para empaquetar un proyecto de Maven, aplicando los comandos `clean` y `package`.
+* **buildah**: Después de que corre la task *maven*, usa la Task *buildah* para construir una imagen del proyecto en Maven y subirla a una cuenta de DockerHub.
+
+Comando para crear la Pipeline
+
+    kubectl create -f pipeline-ci.yaml
+
+### pipelinerun-ci.yaml
+Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **pipeline-ci.yaml**.
+
+Comando para crear la Pipelinerun
+
+    kubectl create -f pipelinerun-ci.yaml
+
+Resultado esperado
+
+* Creación de tres Taskruns y tres Pods: *fetch-repository*, *maven* y *buildah*
+
+![ci1](assets/ci1.png)
+![ci2](assets/ci2.png)
+
+* Salida del Pod *fetch-repository*
+
+![ci3](assets/ci3.png)
+
+* Salida del Pod *maven*
+
+![ci4](assets/ci4.png)
+
+* Salida del Pod *buildah*
+
+![ci5](assets/ci5.png)
+
+* Resultado de la imagen en DockerHub
+
+![ci6](assets/ci6.png)
+
+## tekton examples
 ### hello-worl-task.yaml
 Configuración para la creación de una Task encargada de correr la ejemplificación de un *Hello-world* usando el comando *echo*.
 
