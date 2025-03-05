@@ -241,7 +241,7 @@ Comando para crear la Pipeline
     kubectl create -f pipeline-clone-package.yaml
 
 ## pipelinerun
-## tekton-pipelinerun-hello-world.yaml
+### tekton-pipelinerun-hello-world.yaml
 Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **tekton-pipeline-hello-world.yaml**.
 
 Comando para crear la Pipelinerun
@@ -266,7 +266,7 @@ Resultado esperado
 
 ![pipelines4](assets/pipelines4.png)
 
-## pipelinerun-clone-package.yaml
+### pipelinerun-clone-package.yaml
 Configuraciones para la creación de una Pipelinerun encargada de correr la Pipeline resultante de crear las configuraciones del YAML llamado **pipeline-clone-package.yaml**.
 
 Comando para crear la Pipelinerun
