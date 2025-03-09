@@ -347,3 +347,73 @@ Comando para crear la taskrun
 Resultado esperado
 
 ![helloworld1](assets/helloworld1.png)
+
+## trigger
+### tekton-triggers-sa.yaml
+Configuración para la definición de una cuenta de servicio en el namespace *diploe2-ech*, para integrar los componentes requeridos por Tekton.
+
+Comando para crear el service account
+
+    kubectl create -f tekton-triggers-sa.yaml
+
+### triggers-eventlistener-binding.yaml
+Configuración para la vinculación del rol de Cluster *tekton-triggers-eventlistener-roles*.
+
+Comando para crear el RoleBinding
+
+    kubectl create -f triggers-eventlistener-binding.yaml
+
+### tekton-trigger-template-cicd.yaml
+Configuraciones para la creación de un TriggerTemplate, el cual define la plantilla para crear una PipelineRun, usando como referencia la Pipeline *pipeline-ci*.
+
+Comando para crear el TriggerTemplate
+
+    kubectl create -f tekton-trigger-template-cicd.yaml
+    
+### tekton-trigger-binding-cicd.yaml
+Configuraciones para la creación de un TriggerBinding, el cual define la forma en que se  asignan los datos del evento detonado por el Webhook asociado al repositorio del proyecto *service-facturas*. En este se definen en los parámetros siguientes:
+
+* repo-url: URL del repositorio a clonar.
+* branch-name: Nombre de la rama del proyecto al que hace escucha el proyecto al realizar `push`
+* maven-image: Imagen de Maven utilizada para manejar un projecto de Mavel.
+* docker-image: Nombre de la imagen a generar y mandar a DockerHub
+* deployment-name: Nombre del deploy
+
+Comando para crear el TriggerBinding
+
+    kubectl create -f tekton-trigger-binding-cicd.yaml
+
+### event-listener-cicd.yaml
+Configuraciones para la creación de un EventListener, el cual permite estar a la escucha del evento `push` sobre el proyecto de *facturas-service*, así como procesarlo para ejecución de la PipelineRun generada en TriggerTemplate configurada en el archivo *tekton-trigger-template-cicd.yaml*
+
+Comando para crear el EventListener
+
+    kubectl create -f event-listener-cicd.yaml
+
+### ingress-el-cicd.yaml
+Configuraciones para la creación de un Ingress, el cual permite exponer el EventListener definido en el archivo *event-listener-cicd.yaml*, como un punto de entrada HTTP accesible dentro del clúster, es el que permite la entrada del evento en el Webhook del repositorio del proyecto de *facturas-service*.
+
+Comando para crear el Ingress
+
+    kubectl create -f ingress-el-cicd.yaml
+
+## RESULTADO DEL TRIGGER
+Al subir un cambio en la rama *master*, el cambio resultante de hacer un `push`, detonará el evento para el despliegue del proyecto, el cual, tendrá los siguientes resultados:
+
+1. Dentro del Webhook definido en el proyecto, al consultar la sección de *Recent Deliveries*
+
+![trigger1](assets/trigger1.png)
+
+![trigger2](assets/trigger2.png)
+
+2. Listado de las PipelineRuns en el Cluster, se generará una PipelineRun de *pipelinerun-cicd*
+
+![trigger3](assets/trigger3.png)
+
+3. Listado de los Pods en el Cluster, se generarán tres: *fetch-repository-pod*, *maven-pod* y *buildah-pod*.
+
+![trigger4](assets/trigger4.png)
+
+4. Generación de imágen en DockerHub, en el repositorio [emmanuelcruz/facturas-service](https://hub.docker.com/repository/docker/emmanuelcruz/facturas-service/general)
+
+![trigger5](assets/trigger5.png)
